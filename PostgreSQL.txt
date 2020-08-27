@@ -1,0 +1,31 @@
+PostgreSQL
+컬럼명에 대문자 허용 안됨
+DATE는 날짜만 저장
+TIME은 시간만 저장
+
+TIMESTAMP는 날짜와 시간 모두 저장
+
+현재 날짜를 입력하기 위해서는
+insert문에 필드를 선언하고
+value()안에  now()를 선언
+ex)	<insert id="BoardInsert">
+		insert into mst_goods(goods_cd, goods_name, unit_price, entry_tsp, update_tsp)
+		values(#{goods_cd}, #{goods_name}, #{unit_price}, now(), now())
+	</insert>
+
+
+mapper.xml의 resultType이VO인 경우 DB테이블명과 동일한 VO 필드명에 들어간다
+하지만 PostgreSQL은 대소문자를 구분하기 때문에
+DB테이블 필드명과 VO필드명이 일치하지 않으면 에러가남
+
+1)필드명 대소문자에 따른 작성법
+select * from mst_goods where goods_number = '0000000003';
+select * from mst_goods where "goodsNumber" = '0000000003';
+
+대소문자를 구분하기때문에  ""이라고 명시해야함
+
+VO에 리턴할땐 DB필드명과 VO필드명이 일치해야만 들어감
+
+
+
+http://localhost:8989/board/boardList

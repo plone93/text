@@ -1,0 +1,9 @@
+HTML
+
+div- 그룹
+thead - 테이블 헤드
+tbody - 테이블 바디
+form - 작성한 뒤 여러 데이터를 보낼 때 씀
+button(type="summit") - form태그 전송
+input(type="summit") - form태그 전송
+textarea - 본문 글쓰기 (input은 한줄 입력만되고  textarea는 여러줄 입력 가능)

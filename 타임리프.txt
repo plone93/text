@@ -1,0 +1,40 @@
+#타임리프
+
+1.타임리프를 사용하면 WEB-INF경로를 사용할수 없음
+라임리프를 사용하면 templates, static 폴더에 있는 html 파일이 작동함
+
+변수 사용법
+String text = "hello";
+model.attribute("text", text);
+<p th:text="${text}"></p>
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+<p>hello</p>
+
+VO 사용법
+model.attribute("memberVO", memberVO);
+<p th:text="'이름 : ' +${memberVO.name} "></p>
+<p th:text="'이름 : ' +${memberVO.id} "></p>
+<p th:text="'이름 : ' +${memberVO.email} "></p>
+
+배열 사용법
+<div th:each="board : ${boardVO}"> //model에서 넘어온 boardVO 객체를 board 변수에 입력
+	<ul>
+		<li><p th:text="${board.number}"></p></li>	 //반복
+		<li><p th:text="${board.id}"></p></li>
+		<li><p th:text="${board.name}"></p></li>
+	</ul>
+</div>
+
+하이퍼링크
+<a th:href="@{'/board/boardList/' +${boardId}">
+
+이미지
+<img th"src="${board.img != null ? board.img}" />
+
+배열/리스트 사이즈 체크
+
+<img th:if="${lists.size(diary.files) > 0}" th:src="${diary.files[0]}"/>
+
+문자열 비교
+
+${strings.equals(gender, 'male')}
