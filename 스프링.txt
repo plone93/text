@@ -28,7 +28,50 @@ https://domain.gabia.com/manage/addservice/main
 호스트 주소 : domain.gabia.com
 리소스 경로 : manage/addservice/main
 
+groupId : 모든 프로젝트 중에서 당신의 프로젝트를 식별하게 해주는 식별자 (큰틀 ex) 지하철)
+artifactId : 버전 없는 jar파일의 이름, 특수문자x 소문자로만 작성 (기능 ex) 1호선, 2호선 )
 
+Entity 구현
+
+JPA에서 제공하는 어노테이션
+
+@Entity
+ 클래스와 테이블과 매핑한다고 JPA에게 전달하며, @Entity 어노테이션이 선언된 클래스를 엔티티 클래스라고 합니다.
+
+@Table
+ 엔티티 클래스에 매핑할 테이블 정보를 전달하며, 생략 시 클래스명을 테이블명으로 매핑합니다.
+
+@Id
+ 엔티티 클래스의 필드를 테이블에 기본 키(PK, Primary key)로 매핑합니다.
+
+@GeneratedValue
+ 생성 전략(strategy)에 따라 기본 키를 지정합니다.
+
+AUTO(default) - JPA가 자동으로 생성 전략을 결정합니다.
+IDENTIT - 기본키 생성을 데이터베이스에 위임한다. 예를 들어 MySQL의 경우 AUTO_INCREMENT를 사용하여 기본키를 생성합니다.
+SEQUENCE - 데이터베이스의 특별한 오브젝트 시퀀스를 사용하여 기본키를 생성합니다.
+TABLE - 데이터베이스에 키 생성 전용 테이블을 하나 만들고 이를 사용하여 기본키를 생성합니다.
+
+@Column
+ 엔티티 클래스의 필드를 컬럼에 매핑하며, 생략 시 필드명을 컬럼에 매핑합니다.
+
+@Lob
+ 엔티티 클래스의 필드를 데이터베이스 BLOB, CLOB, TEXT 타입과 맵핑합니다.
+
+
+Lombok에서 제공하는 어노테이션
+
+@NoArgsConstructor
+기본 생성자를 자동으로 추가합니다.
+
+@Getter
+클래스 내 모든 필드의 Getter 메소드를 자동 생성합니다.
+
+@Builder
+해당 클래스의 빌더 패턴 클래스를 생성합니다.
+생성자 상단에 선언 시 생성자에 포함된 필드만 빌더에 포함합니다.
+
+Board.java
 @AllArgsConstructor : 하나의 클래스 안에 있는 변수 전부 빈 자동 생성
 
 1)root-context.xml>mybatis-spring:scan에러

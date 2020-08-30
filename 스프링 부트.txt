@@ -5,6 +5,9 @@
 
 application.properties은 스프링 부트가 실행될때 자동으로 로딩하는 파일
 
+Gradle : build.gradle에서 관리
+Maven : pom.xml에서 관리
+
 1. [MyBatis] Invalid bound statement (not found): 에러
 1)Mapper Interface와 mapping되는 xml파일에 오타가 있는 경우 : 예를 들면 id와 Interface에 메소드명이 일치하지 않는 경우
 2)classpath에 경로가 잘못된 경우
