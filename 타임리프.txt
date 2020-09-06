@@ -38,3 +38,8 @@ model.attribute("memberVO", memberVO);
 문자열 비교
 
 ${strings.equals(gender, 'male')}
+
+세션 다루기
+JSP : ${loginMember}
+Thymeleaf : ${Session.loginMember}
+PHP : $_SESSION[‘loginMember’]

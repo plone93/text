@@ -1,0 +1,225 @@
+Oracle SQL
+
+컬럼 = 열ㅣㅣㅣㅣㅣㅣ
+레코드 = 행ㅡㅡㅡㅡㅡㅡ
+
+CRUD
+C : Create
+R : Read
+U : Update
+D : Delete
+
+#오라클 내장 기능#
+COUNT(*) : 검색조건에 해당하는 열 갯수
+select count(*) from 테이블명 where number = #{number}
+
+시퀀스 : 숫자를 자동생성
+
+#Create#
+
+테이블 생성
+Create Table 테이블명(
+number number(10) primary key,
+title varchar2(30) not null,
+id varcher2(30) not null
+);
+
+#Sequence#
+
+시퀀스 생성
+create sequence 테이블명_seq
+start with 1
+increment by 1;
+maxvalue 1000
+minvalue 1
+nocycle;
+//start with 1: 1부터 시작해서 increment by 1 : 1씩 증가
+
+시퀀스 수정(아래 수정할 컬럼만 수정)
+alter sequence 테이블명_seq
+start with 1 
+increment by 1;
+maxvalue 1000
+minvalue 1
+nocycle;
+
+시퀀스 삭제
+Drop sequence 테이블명_seq;
+
+#insert#
+
+추가
+inset into 테이블명(number, title, id)
+values(#{number}, #{title}, #{id});
+
+추가(시퀀스 사용시)
+inset into 테이블명(number, title, id)
+values(테이블명_seq.nextval, #{title}, #{id});
+
+
+#Update#
+
+업데이트
+update 테이블명 
+set  title = #{title}, id = #{id}
+where number = #{number}
+
+#Delete#
+
+delete from 테이블명
+where number = #{number}
+
+
+#서브쿼리#
+
+#조인#
+board1 number id name
+board2 number id name
+board3 number id productList
+
+JOIN은 각 테이블간에 공통된 조건으로 데이터를 합쳐 표현하는 것
+INNER JOIN(내부 조인), OUTER JOIN(외부조인)이 있음
+
+INNER JOIN(내부 조인)은 조인 조건에서 동일한 값이 있어야만 반환됨
+OUTER JOIN(외부조인)은 조건 조건에서 동일한 값이 없어도 반환됨
+
+INNER JOIN을 줄여쓰면 JOIN이다(JOIN)
+OUTER JOIN도 줄여쓰면 JOIN이다(LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN)
+
+1.1)board1, board2를 조인할 때 id가 공통 컬럼
+SELECT board1.id, board1.name, board2.id, board2.name
+FROM board1, board2
+WHERE board1.id = board2.id;
+
+1.2)테이블명 별칭 사용 법
+SELECT A.id, A.name, B.id, B.name
+FROM board1 A, board2 B
+WHERE A.id = B.id;
+
+2)ANSI 표준조인(JOIN절을 이용한 명시적 조인)
+join절을 명시적으로 선언하여 준의문 작성
+
+SELECT 컬럼이름1, 컬럼이름2
+FROM 테이블명1
+JOIN 테이블명2
+ON 테이블명1.컬럼명 = 테이블명2.컬럼명;
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+SELECT A.id, A.name, B.id, B.name
+FROM board1 A
+JOIN board2 B
+ON A.id = B.id;
+
+3)질의문 사용한 JOIN
+3.1)board1 테이블과 board2 테이블의 조인(특정회원 조회)
+select from을 이용한 조인에 and로 조건을 추가하여 조회 가능
+
+ex)
+SELECT A.id, A.name, B.id, B.name
+FROM board1 A, board2 B
+WHERE A.id = B.id;
+AND A.name = '홍길동';
+
+3.1.2)ANSI 표준쿼리에서는 where문을 추가하여 조건 조회 가능
+SELECT A.id, A.name, B.id, B.name
+FROM board1 A
+JOIN board2 B
+ON A.id = B.id;
+WHERE A.name = '홍길동';
+
+4)3개이상 다중 테이블 조인
+4.1)select, from 절
+
+SELECT A.id, A.name, B.id, B.name, C.id, C.name
+FROM board1 A, board2 B, board3 C
+WHERE A.id = B.id //A테이블 id와 B테이블id가 같으면서
+AND A.id = C.id //A테이블 id와 C테이블 id도 같으면서
+AND A.name = '홍길동'; //A테이블이름이 홍길동
+
+4.2)ANSI표준
+SELECT A.id, A.name, B.id, B.name, C.id, C.name
+FROM board1 A
+JOIN board2 B
+ON A.id = B.id; //A테이블 id와 B테이블id가 같으면서
+JOIN board3 C
+ON A.id = C.id //A테이블 id와 C테이블 id도 같으면서
+WHERE A.name = '홍길동'; //A테이블이름이 홍길동
+
+5)OUTER JOIN(아우터 조인)(LEFT, RIGHT, FULL OUTER JOIN)########################
+INNER JOIN(내부 조인)은 조인 조건에서 동일한 값이 있어야만 반환됨(조인 조건을 만족하는 행을 반환)
+OUTER JOIN(외부조인)은 조건 조건에서 동일한 값이 없어도 반환됨(ex)기준이 되는 테이블(A)은 전체 출력하면서 B테이블은 조건에 만족하는 행만 반환, 조건 만족안하는 행은 null로 반환)
+
+INNER JOIN을 줄여쓰면 JOIN이다(JOIN)
+OUTER JOIN도 줄여쓰면 JOIN이다(LEFT JOIN, RIGHT JOIN, FULL OUTER JOIN)
+
+OUTER JOIN(외부조인)은 USING or ON조건절을 필수적으로 사용해야한다
+LEFT와 RIGHT의 차이는 기준이 되는 테이블이 조인 조건 수행시 드라이빙 테이블(첫번째로 액세스 되는 테이블)이 된다
+
+#LEFT JOIN을 사용하는경우(A가 기준 테이블이 됨, RIGHT JOIN은 B가 기준이 됨)
+A,B테이블의 조인 조건이 맞는 경우 B테이블의 컬럼에서 해당데이터를 가져오고
+조건 조건이 맞지않는 경우 A테이블의 레코드는 무조건 결과값에 나오고 B테이블에서 가져온 컬럼 중 맞지 않은 것은 NULL로 채움
+
+ex) 
+FROM A
+RIGHT JOIN B ON(A.num = B.num AND A.id = B.id)  //RIGHT JOIN B USING(num, id)
+              A 테이블   			B테이블
+num		id                           num		id
+1		aa		    1		aa	
+2		bb		    2		bb
+3		cc		    3		cc	
+4		dd  		    null(4)		null(xx)
+5		ee		    null(7)		null(yy)	
+6		ff		    null(8)		null(ff)	
+
+#FULL OUTER JOIN(조인 테이블 중복제거)
+-좌측 테이블과 우측테이블의 데이터를 모두 읽어 중복된 데이터(둘중 하나)는 삭제한 JOIN결과를 보여줌
+
+ex) 
+FROM A
+FULL OUTER JOIN B ON(A.num = B.num AND A.id = B.id) //RIGHT JOIN B USING(num, id)
+              A 테이블   			B테이블
+num		id                           num		id
+1		aa		    null(1)		null(aa)	
+2		bb		    null(2)		null(bb)
+null(3)		null(cc)		    3		cc	
+4		dd  		    4		xx
+5		ee		    7		ee
+6		ff		    null(6)		null(ff)	
+
+#무조건 적을 데이터를 추출하는 테이블을 드라이빙 테이블로 잡는게 성능에서 좋다
+
+
+
+
+
+5.1)데이터가 없을 수도 있는 쪽 컬럼에 (+)을 추가
+SELECT A.id, A.name, B.id, B.name, C.id, C.productList
+FROM board1 A, board2 B, board3 C
+WHERE A.id = B.id  //A테이블 id와 B테이블id가 같으면서
+AND A.id = C.id(+) //A테이블 id와 C테이블 id도 같으면서(select 조건에 C.productList가 없다면 null로 표기)
+AND A.name = '홍길동';
+
+5.2)ANSI 표준 OUTER JOIN(아우터 조인)
+-ANSI표준에서의 아우터 조인은 LEFT, RIGHT OUTER JOIN(아우터 조인) 2가지가 존재함
+LEFT OUTER JOIN과 LEFT JOIN은 동일하다(줄여쓰기 차이)
+RIGHT OUTER JOIN과 RIGHT JOIN은 동일하다(줄여쓰기 차이)
+
+5.2.1)LEFT OUTER JOIN
+-이전의 JOIN ON절에서 JOIN앞에 LEFT OUTER를 붙여주면 된다
+
+ex) ON을 사용하는 경우
+SELECT A.id, A.name, B.id, B.name, C.id, C.productList
+FROM board1 A
+JOIN board2 B
+ON A.id = B.id     //    ON(A.id = B.id AND A.number = B.number)도 가능
+LEFT OUTER JOIN board3 C
+ON A.id = C.id
+WHERE A.name = '홍길동';
+
+ex) USING을 사용하는 경우
+SELECT A.id, A.name, B.id, B.name, C.id, C.productList
+FROM board1 A
+JOIN board2 B
+USING(id)
+LEFT OUTER JOIN board3 C
+USING(id)
+WHERE A.name = '홍길동';

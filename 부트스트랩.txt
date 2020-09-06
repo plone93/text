@@ -1,0 +1,10 @@
+form태그 하위 목록은 form 그룹(class="form-group")으로 감싸야함
+	<form method="POST" th:action="@{insertedBoard}" name="form" enctype="multipart/form-data" onsubmit="return InsertCheck()">
+		<div class="form-group">
+       		 <label for="code">商品コード</label>
+       		 <input type="text" class="form-control" name="goodsNumber" id="goodsNumber" placeholder="数字10桁">
+       		 <button type="button" class="btn btn-default navbar-btn" value="0" id="checkGoodsNumber">Check</button>
+	</form>
+
+문자 가운데 정렬 : class="text-center"
+버튼 가운데 정렬 : class="center"

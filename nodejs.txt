@@ -6,9 +6,39 @@ node.js
 
 자바스크립트 > 노드js 런타임 > 노드js 어플리케이션
 
-설치 https://nodejs.org/ko/ 
+설치 https://nodejs.org/ko/
+작업 툴 VSCode, Atom 등 
 
 버전확인방법
 
 cmd 창에서 node -8 입력
 컨트롤c 2번으로 종료함
+
+__dirname은 nodejs의 전역변수로서 현재 js파일이 실행되고있는 경로를 가지고있으며
+__filename도 마찬가지로 전역변수이며 js파일이 실행되고있는경로  + 파일명을 가지고있습니다.
+
+브라우저는 window라는 내장 객체가 잇음(내장객체명은 생략 가능)
+window.alert, window.href 등등
+
+하지만 Nodejs는 존재하지않음, 대신에 global이라는 내장객체가 존재함
+__filename, __dirname, process 3가지 내장객체가 존재
+
+__filename : 현재 파일 위치
+__dirname : 현재 경로
+process  : 환경설정에 대한 값과 서버 구동시간, 서버종료 등의 정보
+
+url 모듈
+url정보를 객체로 가져와서 분석하거나 문자열로 변환하는 기능
+
+url.parse() : url문자열을 url객체(vo)로 변환
+url.parse('http://localhost:3000/path/abc.php?id=student&page=12#hash')
+
+true(객체형식으로 가져옴), false(문자열 형식으로 가져옴)
+
+url.parse('http://localhost:3000/path/abc.php?id=student&page=12#hash')
+
+.query : url에서 ? 이후 뒷부분 (?id=student&page=12)
+.id
+.name
+
+url.parse('http://localhost:3000/path/abc.php?id=student&page=12#hash').query
