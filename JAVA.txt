@@ -1,0 +1,100 @@
+#JAVA#
+
+1)파일쓰기
+byte[] bytes = file.getBytes(UTF-8);
+Path path = Paths.get(UPLOAD_PATH + file.getOriginalFilename()); //경로 + 파일이름
+Files.write(path, bytes); // 경로, 파일
+
+1.1) getBytes() 메소드
+getBytes()  자바 내부에 관리되는 유니코드 문자열을 인자(UTF-8, EUC-KR)로 지정된 캐릭터셋의 바이트 배열로 반환하는 메서드
+
+String str = "ABCDEF";
+byte[] arr = str.getBytes();
+		
+System.out.println(arr);// [B@15db9742
+		
+for(int i=0; i<arr.length; i++) {
+    System.out.println(arr[i]); // 65 66 67 68 69 70
+}
+
+// 유니코드 문자열을 UTF-8 캐릭터 바이트배열로 변환하여 반환
+String str = "ABCDEF";
+byte [] utf8 = str.getBytes("UTF-8");
+
+// 유니코드 문자열을 EUC-KR 캐릭터 바이트배열로 변환하여 반환
+byte [] euckr = str.getBytes("EUC-KR");
+  
+// 당연히 다른 바이트 배열이므로 사이즈가 다르다.
+System.out.println(utf8.length); // byte length > 11
+System.out.println(euckr.length); // byte length > 8
+  
+// 실수 코드.
+// UTF-8 캐릭터셋으로 배열된 바이트배열을 EUC-KR로 해석할 수 없다.
+System.out.println(new String(utf8, "EUC-KR"));
+
+1.2)Path 클래스(자바7, 8)
+Path 클래스는 하나의 경로를 다른것과 합치는데 씀
+
+byte[] bytes = file.getBytes();
+Path path = Paths.get(UPLOAD_PATH + file.getOriginalFilename()); //경로 + 파일이름
+String pathSTR = UPLOAD_PATH + file.getOriginalFilename();
+			
+System.out.println(path); //.\src\main\resources\static\images\201097.jpg
+System.out.println(pathSTR); // ./src/main/resources/static/images/201097.jpg, Files.write 메소드가 인식못함
+
+Files.write(path, bytes);// Path클래스, 바이트배열
+
+#UUID(GUID라고도 부름)
+1)UUID는 Universally unique identifier의 약자로서, 정보 식별을 위하여 사용되는 식별자이다
+2)128-bit 숫자로 이루어져 있으며, xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx 형식으로 표현한다
+EX) abb4154b-6e87-4611-a0cc-f802804c104d   (랜덤난수생성)
+3)UUID의 장점 중, 데이터들이 나중에 단일 DB로 통합되거나, 같은 채널에서 전송되더라도 식별자가 중복될 확률이 매우 낮다는 점이 있다
+
+UUID uuid = UUID.randomUUID();
+String uuidStr = UUID.randomUUID().toString();  // 둘다 같음
+
+
+
+#문자 Stream
+영어 이외의 문자에 대한 처리와 문자인코딩을 해주고 2바이트 크기의 입출력을 함
+
+Reader ----BufferedReader
+	  InputStreamReader ---- FileReader	
+Writer ---- BufferedWriter(한줄씩 씀)
+	  OutputStreamWriter ---- FileWriter	
+
+	Reader reader = new FileReader("c:\\test\\JAVA.txt");
+	InputStreamReader inputStream = new FileReader("c:\\test\\JAVA.txt"); //new FileInputStream("c:\\test\\JAVA.txt"); 정상
+	FileReader inputStream = new FileReader("c:\\test\\JAVA.txt"); //new FileInputStream("c:\\test\\JAVA.txt"); 정상
+
+#Byte Stream
+초기 자바는 바이트 단위로 입출력을 지원함
+가장 원시적인 형태의 입출력이며 아무런 변환작업을 수행하지 않음
+바이너리 형태의 자원을 다루기 적합
+
+InputStream ---- FileInputStream
+	          filterInputStream ----BufferedInputStream
+				DataInputStream	
+
+OutputStream ----FileOutputStream
+	           FilterOutputSteam ----BufferedOutputStream
+				   DataOutputStream
+
+#InputStream
+InputStream inputStream = new FileInputStream("c:\\test\\test.xls");
+char c = (char)inputStream.read();// 숫자로 읽음, \n만나면 종료됨 종료되면 -1을 리턴함
+
+
+#OutputStream
+OutputStream outputStream = new FileOutputSteam("c:\\test\\test.xls");
+String str = "ABC123";
+byte[] c = str.getBytes()
+outputSteam.write(c);
+
+
+FileReader fr = new FileReader("c:\\test\\JAVA.txt"); //파일 읽기
+FileWriter fw = new FileWriter("c:\\test\\result.txt"); //파일 쓰기
+			
+BufferedReader br = new BufferedReader(fr);//한줄씩 읽기
+BufferedWriter bw = new BufferedWriter(fw);//한줄씩 쓰기
+System.out.println("BufferedReader : "+br.readLine());

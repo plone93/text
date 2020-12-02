@@ -3,6 +3,9 @@
 1.타임리프를 사용하면 WEB-INF경로를 사용할수 없음
 라임리프를 사용하면 templates, static 폴더에 있는 html 파일이 작동함
 
+@{} 정적 변수 
+${} 동적 변수
+
 변수 사용법
 String text = "hello";
 model.attribute("text", text);
@@ -29,7 +32,10 @@ model.attribute("memberVO", memberVO);
 <a th:href="@{'/board/boardList/' +${boardId}">
 
 이미지
-<img th"src="${board.img != null ? board.img}" />
+<img th:src="${board.img != null ? board.img}" />
+
+<img th:src="@{/images/42.jpg}"  width="300px" height="200px;" /> 정적
+<img th:src="@{https://graph.facebook.com/}+${id }+@{/picture}" /> 동적
 
 배열/리스트 사이즈 체크
 

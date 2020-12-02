@@ -46,23 +46,29 @@ nocycle;
 시퀀스 삭제
 Drop sequence 테이블명_seq;
 
+#Read#
+SELECT * 
+FROM 테이블명
+WHERE number = #{number}
+
+
 #insert#
 
 추가
-inset into 테이블명(number, title, id)
-values(#{number}, #{title}, #{id});
+INSERT INTO 테이블명(number, title, id)
+VALUES(#{number}, #{title}, #{id});
 
 추가(시퀀스 사용시)
-inset into 테이블명(number, title, id)
-values(테이블명_seq.nextval, #{title}, #{id});
+INSERT INTO 테이블명(number, title, id)
+VALUES(테이블명_seq.nextval, #{title}, #{id});
 
 
 #Update#
 
 업데이트
-update 테이블명 
-set  title = #{title}, id = #{id}
-where number = #{number}
+UPDATE 테이블명 
+SET title = #{title}, id = #{id}
+WHERE number = #{number}
 
 #Delete#
 
@@ -97,7 +103,7 @@ FROM board1 A, board2 B
 WHERE A.id = B.id;
 
 2)ANSI 표준조인(JOIN절을 이용한 명시적 조인)
-join절을 명시적으로 선언하여 준의문 작성
+join절을 명시적으로 선언하여 질의문 작성
 
 SELECT 컬럼이름1, 컬럼이름2
 FROM 테이블명1
@@ -185,7 +191,7 @@ null(3)		null(cc)		    3		cc
 5		ee		    7		ee
 6		ff		    null(6)		null(ff)	
 
-#무조건 적을 데이터를 추출하는 테이블을 드라이빙 테이블로 잡는게 성능에서 좋다
+#무조건 적은 데이터를 추출하는 테이블을 드라이빙 테이블로 잡는게 성능에서 좋다
 
 
 

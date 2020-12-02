@@ -58,6 +58,8 @@ TABLE - 데이터베이스에 키 생성 전용 테이블을 하나 만들고 �
 @Lob
  엔티티 클래스의 필드를 데이터베이스 BLOB, CLOB, TEXT 타입과 맵핑합니다.
 
+ResponseEntity<?> // model.setAttribute("message", "파일을 선택하세요");
+return new ResponseEntity("파일을 선택하세요", HttpStatus.OK);
 
 Lombok에서 제공하는 어노테이션
 

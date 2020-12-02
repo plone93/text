@@ -1,0 +1,29 @@
+#VBA
+엑셀화면에서 Alt + F11을 누르면 실행됨
+F5를 눌러서 실행
+엑셀창에서는 Alt + F8
+
+'으로 시작하면 주석  ex) '주석 
+
+서브루틴(Subroutine) : 특정기능을 수행하는 코드의 묶음
+
+Sub 함수명()
+/사이에 코드를 기록/
+End Sub
+
+Sub helloWord()
+    Sheet1.Range("A1").Value = "hello world" // Sheet1시트에 A1에 hello world를 출력
+End Sub
+
+Sub helloWord()
+    Sheet1.Range("A1:A100").Value = "hello world" // Sheet1시트에 A1~A100에 hello world를 출력
+End Sub
+
+
+#Range Class
+
+Sub test()
+    Sheets(1).Range("A2").Value = "hello Wolrd" //Sheet1에 A2에 hello Wolrd 출력
+    Sheets(1).Range("A3").Select  //Sheet1의 A3을 선택
+    Range("A1").Value = "hello Wolrd" // A1에 hello world 출력, 시트 지정이 없으면 Sheet1에 출력됨
+End Sub

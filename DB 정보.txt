@@ -3,5 +3,5 @@ ID : system
 PASS : 1234
 
 PostgreSQL
-ID :
-PASS : password
+ID : postgres
+PASS : 1234
