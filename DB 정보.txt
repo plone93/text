@@ -5,3 +5,6 @@ PASS : 1234
 PostgreSQL
 ID : postgres
 PASS : 1234
+
+SQLserver
+ID : PLONE

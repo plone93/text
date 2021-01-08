@@ -1,0 +1,191 @@
+C#
+
+프로젝트 오른쪽마우스>실행프로젝트 설정
+
+.net 프레임워크 위에서 작동함
+
+자바와 다르게 첫문자 대문자
+인수는 첫문자 소문자
+
+문자열 앞에 @를 붙이면 백슬래시 한번만 써도 됨
+sql문자열 앞에 붙이면 개행할때 + 안해도됨
+sql변수앞에 붙이기도 함
+
+솔루션
+ㄴ프로젝트명
+   ㄴ프로퍼티
+   ㄴ참조
+   ㄴApp.config
+   ㄴform.cs
+   ㄴProgram.cs
+
+솔루션이 실행되면
+프로젝트의 Program.cs에 있는 Main() 메서드를 실행함 
+
+데이터 타입
+#문자열 string
+길이 string.length()
+
+#정수 int
+
+#bool
+true, false
+
+자바 import = C# using
+
+콘솔출력
+System.out.println() = Console.WriteLine()
+
+콘솔입력
+Console.ReadKey()
+
+
+클래스에 속한 함수를 메서드라고 함
+함수의 이름은 같지만 매개변수가 다르면 같은 이름의 함수를 여러개 만들수 있음 - 오버로딩
+이름이 같은 함수, 같은 매개변수를 가진 함수를 재정의 - 오버라이딩
+
+#접근제한자
+public : 외부 패키지에서도 사용 가능
+private : 해당 클래스 내부에서만 사용 가능
+protected
+internal : 해당 패키지 안에서만 사용가능
+
+아무것도 작성하지않으면 기본 private
+
+변수의 접근제한자는 클래스의 멤버필드에서만 작성가능
+
+namespace  프로젝트명 : 패키지
+
+#클래스 생성법
+프로젝트 오른쪽>Add>New Item>클래스
+프로젝트 하위에 생성 됨
+
+#생성자
+모든 클래스는 생성하면 자동적으로 클래스와 같은이름의 같은 기본생성자가 자동으로 생성 됨
+생성자는 호출해야하기 때문에 public으로 해야하며, 클래스와 이름이 같아야함
+반환 타입이 없기 때문에 void 작성 불필요
+
+오른쪽마우스 >빠른작업 및 리팩터링 > 생성자 자동생성
+
+#getter, setter 생성(C#은 첫글자 대문자)
+prop 입력수 tab 누르면 프로퍼티 생성 됨
+
+방법1.
+private string m_strTitle;
+public string strTitle
+{
+  get { return m_strTitle; }
+  set { m_strTitle = value; }
+}
+방법2. (간략표기)
+public string StrTitle { get; set; }
+
+
+
+
+출처: https://blog.edit.kr/entry/Class에-있는-get-get-쉽게-만들기 [소금인형 - SW개발자?]
+
+#상속(extends > :)
+자바 : class1 extends class2
+C# : class1 : class2
+
+
+#partial class
+
+#Windows Forms App
+
+
+
+#컬렉션
+ArrayList<> list
+list.Add()
+list.Insert(리스트번호, 값)
+list.Remove(값) //값으로 삭제
+list.RemoveAt(리스트번호) //번호로 삭제
+
+list.Count // 리스트길이,  자바 : list.size
+
+
+#foreach : 배열, 리스트 for문
+foreach(데이터타입 변수명 in 리스트){ //+1씩 증가하면서 변수에 값을 넣음
+}
+
+#AS, IS 연산자
+AS : 조건문에서 두 객체의 데이터 타입이 동일한지 비교해서 true, false 반환
+
+string str = "a";
+if(str is string){
+}
+IS : 객체의 데이터 타입이 같다면 
+
+
+
+
+###################디자인
+
+1.
+도구상자에서 사용할 도구를 끌어다 씀
+속성창에서 name, 디자인, 문자를 변경함
+속성창 상단에 정렬순, 이벤트등 있고
+
+2.
+이벤트에서 도구가 가질수 있는 이벤트를 선택가능
+이벤트가 실행하는 함수를 이벤트핸들러 라고 함
+
+3.
+이벤트를 설정하면 함수가 생성됨
+함수안에 label이름.을 작성하면 label이 가지고 있는 속성과 함수가 나옴
+
+프론트(label, button 등) name은 중복될 수 없다
+
+파일.Designer.cs파일에서 디자인파일에서 생성한 도구의 이름, 위치, 이벤트 메서드 수정 가능
+
+패널 = 그룹
+텍스트박스 = 멀티라인 true로 설정하면 상하 크기 조절 가능
+리스트박스, 리스트뷰 = 배열,리스트 아이템을 출력함
+데이터 그리드뷰 = 데이터를 테이블로 표기
+NumericUdDown = 숫자입력 및 업다운버튼
+패널안에 추가>오른쪽마우스>열추가>컬럼추가
+Dock속성으로 위치 조정
+SelectionMode에서 선택될 행,열 선택
+MuiltiSelect 하나의 행만 선택되도록 함
+EditMode  사용자가 수정 못하게 하도록 함
+이벤트에서 sellClick으로  해당 셀을 클릭하면 함수를 실행
+
+
+
+
+#라이브러리 작성
+
+1.프로젝트>클래스라이브러리
+2.프로젝트>추가>폴더
+3.폴더>클래스 추가
+
+#라이브러리 추가
+라이브러리를 작성하면 DLL형태로나옴
+레퍼런스(참조)>레퍼런스 추가
+using 라이브러리명
+
+
+
+#키워드 : 메서드 역할을 알기쉽게 표기해놓는것, 컴파일 될때 무시됨
+
+#region Constructors
+#endregion
+
+#region Methods
+#endregioin
+
+
+#DB연결
+1.App.confing 열기
+2.아래코드 입력
+  <connectionStrings>
+    <add name="객체이름" 
+         connectionString="
+         Data Source =사용할 서버 이름;
+         Initial Catalog=사용할 서버 안에 있는 DB이름;
+         User ID=DB에 로그인할 ID; //sql server인증
+         Password=DB에 로그인할 비밀번호" //sql server인증
+         Integrated Security=true;/> //윈도우 인증
+  </connectionStrings>

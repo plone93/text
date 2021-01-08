@@ -1,0 +1,86 @@
+SQL Server
+기본 1433포트 사용
+
+F7을 눌러 개체정보 탐색
+
+오라클처럼 대소문자 구분안함
+오라클과 다르게 1서버에 여러 데이터베이스 생성 가능
+
+정수 tinyint < smallint < int <bigint
+문자 varchar, nvarchar2(가변문자)
+날짜 smalldatetime, datetime, 현재날짜 getdate()
+자동증가 identity(1,1)
+
+별칭 AS or 스페이스
+연산자 + - * 사용가능
+
+#기본 스키마이름은 dbo이다
+#시작할때 사용할 DB를 지정해야 함
+USE DB이름;
+지정 안하는 경우 경로지정 필수
+
+SEELCT * FROM [데이터베이스명].[스키마].[테이블명]
+
+EX)
+USE MYDB;
+
+SELECT *
+FROM examsite T1
+INNER JOIN examsite2 T2
+ON T1.boardNum = T2.boardNum;
+
+
+
+
+#CRUD
+
+#CREATE(오라클과 동일)
+CREATE TABLE 테이블명(
+);
+
+#SELECT
+SELECT *
+FROM [서버네임].[데이터베이스명].[스키마].[테이블명]
+
+서버이름 검색 방법
+SELECT @@SERVERNAME
+
+
+
+
+#1씩자동증가(오라클 시퀀스)
+CREATE TABLE 테이블 (
+boardNum int identity(1,1) not null
+)
+
+SQL SERVER STUDIO
+DB>프로그래밍 기능>시퀀스
+NEXT VALUE FOR MSTGOODS_SEQ
+
+#GO(일괄처리단위를 구분하는 수식어)
+create table ~
+insert into~
+
+GO
+select from~
+insert into~
+
+GO
+
+
+#SELECT TO CREATE
+use MYDB;
+SELECT * INTO EXAMSITE3 FROM examsite;
+
+#SELECT TO INSERT
+INSERT INTO テーブルA(
+     列1
+    ,列2
+)
+SELECT 列1
+      ,列2
+FROM   テーブルB
+
+
+https://qiita.com/kazuho39/items/0d3e617661670311ea05
+https://jiwondh.github.io/2017/10/15/tree/

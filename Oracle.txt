@@ -1,5 +1,11 @@
 Oracle SQL
 
+숫자 NUMBER
+문자 varchar2, nvarchar2(가변문자)
+날짜 DATE, 현재날짜 SYSDATE
+별칭 AS or 스페이스
+연산자 + - * 사용가능
+
 컬럼 = 열ㅣㅣㅣㅣㅣㅣ
 레코드 = 행ㅡㅡㅡㅡㅡㅡ
 

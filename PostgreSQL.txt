@@ -1,7 +1,11 @@
 PostgreSQL
 컬럼명에 대문자 허용 안됨
-DATE는 날짜만 저장
-TIME은 시간만 저장
+
+정수 int
+문자 varchar
+날짜 DATE는 날짜만 저장,TIME은 시간만 저장, 현재날짜 now()
+별칭 AS or 스페이스
+연산자 + - * 사용가능
 
 TIMESTAMP는 날짜와 시간 모두 저장
 
