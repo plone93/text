@@ -189,3 +189,27 @@ using 라이브러리명
          Password=DB에 로그인할 비밀번호" //sql server인증
          Integrated Security=true;/> //윈도우 인증
   </connectionStrings>
+
+
+app.config, web.config로 변수관리
+<configuration>안에는
+  <configSections>가 가장 첫번째로 와야함
+    
+  </configSections>
+
+참조>추가>System.Configration 추가
+사용할 클래스에 using System.Configuration; 추가
+
+  <appSttings>
+    <add key="SMTPSender" value ="do_not_reply@test.com"></add>
+    <add key="SMTPHost" value ="smtp.com"></add>
+    <add key="SMTPPort" value ="2525"></add>
+    <add key="SMTPId" value ="id"></add>
+    <add key="SMTPPass" value ="password"></add>
+  </appSttings>
+컬렉션형태로 들어감 
+
+ConfigurationManager.AppSettings["SMTPSender"]; 
+or
+ConfigurationManager.AppSettings[0];
+

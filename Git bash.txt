@@ -1,0 +1,137 @@
+#Git bash
+CMD로 Git을 조작
+
+작업 공간 > 준비영역 > 로컬 저장소(리포지토리) > 원격저장소(리포지토리)(오리진)
+
+#최초 설정(git config)
+1. git commit에 사용될 username
+git config --global user.name "your_name"
+ 
+2. git commit에 사용될 email
+git config --global user.email "your_email@example.com"
+ 
+설정한 내용을 확인할 수 있다.
+git config --list
+
+
+#로컬 저장소 설정(git init)
+1. 버전관리를 시작하려는 프로젝트 폴더를 선택하고 마우스 오른쪽 버튼>Git Bash Here 클릭>명령창
+Git 명령어는 반드시 해당 프로젝트 디렉토리(위치)에서 입력해야한다
+OR
+1.로컬저장소로 설정할 프로젝트 위치로 이동한다.
+cd C:/dev/workspace/eom2017
+ 
+2.로컬저장소로 설정한다.
+(master) 브랜치로 보이면 성공한 것이다.
+git init
+ 
+만약 init을 취소하려면 아래의 명령어를 입력한다.
+rm -r .git
+
+
+#로컬저장소와 원격저장소를 연결(git remote)
+Github 원격저장소와 연결한다.
+git remote add origin [자신의 Github 원격저장소 주소]
+ 
+연결된 원격저장소 확인한다.
+git remote -v
+
+
+#로컬저장소의 현재상태를 보여준다(git status)
+
+#파일을 준비영역으로 이동시킨다(git add)
+
+1개의 파일만 추가 ###
+git add 파일명
+ 
+현재 디렉터리 내 모든 파일을 추가 ###
+git add .
+
+파일 add 취소
+git reset HEAD 파일명
+
+add 전체 취소(파일명이 없으면 전체 취소 됨)
+git reset HEAD
+ 
+명령 프롬프트에서 상호작용하면서 추가 (나갈땐 q를 입력)
+git add -i
+ 
+진행중인 파일일 경우, Staging Area에서 준비영역으로 옮겨온다. 
+$git rm --cached a.html
+$git rm -r --cached .
+
+
+#파일을 로컬 저장소에서 로컬 리포지토리로 이동시킨다(git commit)
+  로컬저장소 > 로컬리포지토리 >마스터 리포지토리
+
+에디터가 출력되고, 에디터에서 커밋 메시지 입력 후 저장하면 커밋됨
+git commit
+ 
+간단한 커밋 메시지를 입력후 커밋 ###
+git commit -m "커밋 메시지"  
+ 
+// Staging Area에 들어간 파일에 대해서만 (워킹 디렉터리는 적용 X)
+git commit -a -m "커밋 메시지"
+
+commit 취소
+// [방법 1] commit을 취소하고 해당 파일들은 staged 상태(add)로 워킹 디렉터리에 보존
+$ git reset --soft HEAD^
+// [방법 2] commit을 취소하고 해당 파일들은 unstaged 상태로 워킹 디렉터리에 보존
+$ git reset --mixed HEAD^ // 기본 옵션
+$ git reset HEAD^ // 위와 동일
+$ git reset HEAD~2 // 마지막 2개의 commit을 취소
+
+
+
+#원격저장소에 전송(git push)
+로컬저장소에서 원격 저장소로 전송
+
+원격저장소에 저장한다.
+git push origin master
+git push -u origin master
+
+
+
+#원격저장소에서 fetch
+git fetch
+
+#원격저장소에서 pull(패치+마지)
+git pull
+
+
+#로컬저장소에서 merge
+로컬저장소와 작업환경을 합침
+
+git merge 브랜치명    ex) git merge master
+Already up to date.  - 이미 최신
+
+#로컬저장소의 커밋 이력을 조회(git log)
+커밋 이력 상세조회
+git log 
+ 
+커밋 이력중 커밋ID, 타이틀 메시지만 조회
+git log --oneline
+ 
+모든 브랜치 커밋 이력 조회
+git log --oneline --decorate --graph --all
+ 
+특정 파일의 변경 커밋 조회
+git log -- a.html
+
+
+#브랜치 생성, 수정 삭제(git branch)
+1) 브랜치 보기
+$git branch
+$git branch -r
+
+1.1) 브랜치 모두 보기
+$git branch -a
+
+2) 브랜치 생성
+$git branch [브랜치명]
+
+3) 브랜치 수정
+$git branch -m [브랜치명] [바꿀이름]
+
+4) 브랜치 삭제
+$git branch -d [브랜치명]
